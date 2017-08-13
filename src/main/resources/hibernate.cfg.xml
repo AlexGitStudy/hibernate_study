@@ -4,10 +4,27 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url"/>
-    <property name="connection.driver_class"/>
-     <property name="connection.username"/>
-     <property name="connection.password"/>
+
+      <!--В случае веб приложения уже указываем не эти (url,udername,password) настройки а уже специальные для jndi. Чтобы он потом уже они считывались из application server и тд-->
+      <property name="connection.url">jdbc:mysql://localhost:3306/lib_h?useSSL=false</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">qwe123</property>
+
+
+      <property name="hibernate.connection.characterEncoding">utf8</property>
+
+      <!--показывать sql запросы в консоли-->
+      <property name="show_sql">true</property>
+
+      <!--Форматировканный sql запрос удобней читать чем в строку-->
+      <property name="hibernate.format_sql">true</property>
+
+      <property name="default_schema">lib_h</property>
+
+      <!--к какому контексту будет привязанна сессия hibernate.thread-поток. с потоком будет закрываться и сессия. У вебу подругому-->
+      <property name="hibernate.current_session_context_class">thread</property>
+
+      <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
